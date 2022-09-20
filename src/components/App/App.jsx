@@ -13,6 +13,19 @@ export default class App extends Component {
     filter: ''
   }
 
+  componentDidUpdate(prevProps, prevState) {
+    if (prevState.contacts.lenght !== this.state.contacts.length) {
+      return localStorage.setItem('contacts', JSON.stringify(this.state.contacts))
+    }
+  }
+
+  componentDidMount() {
+    const localStorageContacts = JSON.parse(localStorage.getItem('contacts'))
+    if (localStorageContacts?.length > 0) {
+      this.setState({ contacts: [...localStorageContacts] })
+    }
+  }
+
   addContact = (contact) => {
     if (this.onDuplicatingName(contact)) {
       return Notify.failure(`This contact: (${contact.name}) is already in your contact book`);

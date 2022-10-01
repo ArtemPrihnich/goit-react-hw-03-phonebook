@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { nanoid } from 'nanoid'
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
-import ContactsForm from '../ContactsForm/ContactsForm';
+import ContactsFormFormik from 'components/ContactsForm/ContactsFormFormik';
 import ContactsList from '../ContactsList/ContactsList';
 import ContactsFilter from '../ContactsFilter/ContactsFilter';
 import { Box } from './App.styled';
@@ -83,7 +83,7 @@ export default class App extends Component {
     const contacts = this.getFilteredContacts()
     return (
       <Box>
-        <ContactsForm onSubmit={addContact} />
+        <ContactsFormFormik onSubmit={addContact} />
         <ContactsFilter inputChange={handleChange} filterValue={this.state.filter} />
         <ContactsList contacts={contacts} onDelete={deleteContact} />
       </Box >
